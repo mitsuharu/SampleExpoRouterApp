@@ -36,6 +36,10 @@ export default function RootLayout() {
       <Stack initialRouteName="index">
         <Stack.Screen name="index" options={{ title: 'ホーム' }} />
         <Stack.Screen name="tabs" options={{ title: 'タブ' }} />
+        <Stack.Screen
+          name="modal"
+          options={{ title: 'モーダル', presentation: 'modal' }}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
