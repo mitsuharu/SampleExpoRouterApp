@@ -13,18 +13,12 @@ type Props = ComponentProps & {}
 
 const Component: React.FC<ComponentProps> = ({ onPressNavigateTabs }) => {
   const styles = useStyles()
-
-  const onPress = () => {}
-
+  
   return (
     <ScrollView>
       <ScrollView style={styles.scrollView}>
         <Section title="section 1">
-          <Cell title="タブ" onPress={onPressNavigateTabs} />
-          <Cell title="cell 2" onPress={onPress} />
-        </Section>
-        <Section title="section 2">
-          <Cell title="has AccessoryView" />
+          <Cell title="タブを表示する" onPress={onPressNavigateTabs} />
         </Section>
       </ScrollView>
     </ScrollView>
