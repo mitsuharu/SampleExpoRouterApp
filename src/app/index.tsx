@@ -9,6 +9,7 @@ import { makeStyles } from 'react-native-swag-styles'
 type ComponentProps = {
   onPressNavigateTabs: () => void
   onPressNavigateModal: () => void
+  onPressNavigateUnmatched: () => void
   onPressNavigateFailed: () => void
 }
 type Props = ComponentProps & {}
@@ -16,6 +17,7 @@ type Props = ComponentProps & {}
 const Component: React.FC<ComponentProps> = ({
   onPressNavigateTabs,
   onPressNavigateModal,
+  onPressNavigateUnmatched,
   onPressNavigateFailed,
 }) => {
   const styles = useStyles()
@@ -27,7 +29,11 @@ const Component: React.FC<ComponentProps> = ({
           <Cell title="タブを表示する" onPress={onPressNavigateTabs} />
           <Cell title="モーダルを表示する" onPress={onPressNavigateModal} />
           <Cell
-            title="エラーハンドリング（未設定ページを表示する）"
+            title="エラーハンドリング（未設定ページ）"
+            onPress={onPressNavigateUnmatched}
+          />
+          <Cell
+            title="エラーハンドリング（レンダリングエラー）"
             onPress={onPressNavigateFailed}
           />
         </Section>
@@ -47,15 +53,24 @@ const Container: React.FC<Props> = (props) => {
     router.navigate('/modal')
   }, [router])
 
-  const onPressNavigateFailed = useCallback(() => {
+  const onPressNavigateUnmatched = useCallback(() => {
     // 存在しないページを表示させようとします
     router.navigate('/404' as Href)
+  }, [router])
+
+  const onPressNavigateFailed = useCallback(() => {
+    router.navigate('/failed')
   }, [router])
 
   return (
     <Component
       {...props}
-      {...{ onPressNavigateTabs, onPressNavigateModal, onPressNavigateFailed }}
+      {...{
+        onPressNavigateTabs,
+        onPressNavigateModal,
+        onPressNavigateUnmatched,
+        onPressNavigateFailed,
+      }}
     />
   )
 }

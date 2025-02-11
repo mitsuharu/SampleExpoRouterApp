@@ -48,6 +48,7 @@ export default function RootLayout() {
           name="modal"
           options={{ title: 'モーダル', presentation: 'modal' }}
         />
+        <Stack.Screen name="failed" />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
