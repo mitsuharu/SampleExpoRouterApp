@@ -14,6 +14,7 @@ type ComponentProps = {
   onPressNavigateFailed: () => void
   onPressNavigateUserID: () => void
   onPressNavigateUserJson: () => void
+  onPressNavigateAB: () => void
 }
 type Props = ComponentProps & {}
 
@@ -24,6 +25,7 @@ const Component: React.FC<ComponentProps> = ({
   onPressNavigateFailed,
   onPressNavigateUserID,
   onPressNavigateUserJson,
+  onPressNavigateAB,
 }) => {
   const styles = useStyles()
 
@@ -51,6 +53,9 @@ const Component: React.FC<ComponentProps> = ({
             title="UserJson（オブジェクトを JSON にして渡す）"
             onPress={onPressNavigateUserJson}
           />
+        </Section>
+        <Section title="リダイレクト">
+          <Cell title="ABテスト" onPress={onPressNavigateAB} />
         </Section>
       </ScrollView>
     </ScrollView>
@@ -96,6 +101,10 @@ const Container: React.FC<Props> = (props) => {
     })
   }, [router])
 
+  const onPressNavigateAB = useCallback(() => {
+    router.navigate('/a')
+  }, [router])
+
   return (
     <Component
       {...props}
@@ -106,6 +115,7 @@ const Container: React.FC<Props> = (props) => {
         onPressNavigateFailed,
         onPressNavigateUserID,
         onPressNavigateUserJson,
+        onPressNavigateAB,
       }}
     />
   )
