@@ -4,7 +4,7 @@ import {
   ThemeProvider,
 } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
+import { Stack, useGlobalSearchParams, usePathname } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect } from 'react'
@@ -20,6 +20,14 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
+
+  const pathname = usePathname()
+  const params = useGlobalSearchParams()
+
+  useEffect(() => {
+    // ユーザーがルートを変更するたびに解析サービスにアプリのパスやパラメータを送信する
+    console.log(`pathname: ${pathname}, params: ${JSON.stringify(params)}`)
+  }, [pathname, params])
 
   useEffect(() => {
     if (loaded) {
