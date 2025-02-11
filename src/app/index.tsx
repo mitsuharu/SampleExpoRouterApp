@@ -5,12 +5,15 @@ import { Href, useRouter } from 'expo-router'
 import { useCallback } from 'react'
 import { ScrollView, useColorScheme, ViewStyle } from 'react-native'
 import { makeStyles } from 'react-native-swag-styles'
+import { User } from './userJson'
 
 type ComponentProps = {
   onPressNavigateTabs: () => void
   onPressNavigateModal: () => void
   onPressNavigateUnmatched: () => void
   onPressNavigateFailed: () => void
+  onPressNavigateUserID: () => void
+  onPressNavigateUserJson: () => void
 }
 type Props = ComponentProps & {}
 
@@ -19,6 +22,8 @@ const Component: React.FC<ComponentProps> = ({
   onPressNavigateModal,
   onPressNavigateUnmatched,
   onPressNavigateFailed,
+  onPressNavigateUserID,
+  onPressNavigateUserJson,
 }) => {
   const styles = useStyles()
 
@@ -35,6 +40,16 @@ const Component: React.FC<ComponentProps> = ({
           <Cell
             title="エラーハンドリング（レンダリングエラー）"
             onPress={onPressNavigateFailed}
+          />
+        </Section>
+        <Section title="データ渡し">
+          <Cell
+            title="UserID（URLパラメータでデータを渡す）"
+            onPress={onPressNavigateUserID}
+          />
+          <Cell
+            title="UserJson（オブジェクトを JSON にして渡す）"
+            onPress={onPressNavigateUserJson}
           />
         </Section>
       </ScrollView>
@@ -62,6 +77,25 @@ const Container: React.FC<Props> = (props) => {
     router.navigate('/failed')
   }, [router])
 
+  const onPressNavigateUserID = useCallback(() => {
+    // router.navigate または router.push のどちらでも OK
+    router.navigate('/userID?userID=123')
+  }, [router])
+
+  const onPressNavigateUserJson = useCallback(() => {
+    // router.navigate または router.push のどちらでも OK
+    const user: User = {
+      userID: '1234',
+      name: 'aaaa',
+    }
+    router.push({
+      pathname: '/userJson',
+      params: {
+        userJson: JSON.stringify(user),
+      },
+    })
+  }, [router])
+
   return (
     <Component
       {...props}
@@ -70,6 +104,8 @@ const Container: React.FC<Props> = (props) => {
         onPressNavigateModal,
         onPressNavigateUnmatched,
         onPressNavigateFailed,
+        onPressNavigateUserID,
+        onPressNavigateUserJson,
       }}
     />
   )
