@@ -1,7 +1,7 @@
 import { Cell, Section } from '@/components/List'
 import { Colors } from '@/constants/Colors'
 import { styleType } from '@/utils/styles'
-import { useRouter } from 'expo-router'
+import { Href, useRouter } from 'expo-router'
 import { useCallback } from 'react'
 import { ScrollView, useColorScheme, ViewStyle } from 'react-native'
 import { makeStyles } from 'react-native-swag-styles'
@@ -9,12 +9,14 @@ import { makeStyles } from 'react-native-swag-styles'
 type ComponentProps = {
   onPressNavigateTabs: () => void
   onPressNavigateModal: () => void
+  onPressNavigateFailed: () => void
 }
 type Props = ComponentProps & {}
 
 const Component: React.FC<ComponentProps> = ({
   onPressNavigateTabs,
   onPressNavigateModal,
+  onPressNavigateFailed
 }) => {
   const styles = useStyles()
 
@@ -24,6 +26,7 @@ const Component: React.FC<ComponentProps> = ({
         <Section title="ナビゲーションの基礎">
           <Cell title="タブを表示する" onPress={onPressNavigateTabs} />
           <Cell title="モーダルを表示する" onPress={onPressNavigateModal} />
+          <Cell title="エラーハンドリング（未設定ページを表示する）" onPress={onPressNavigateFailed} />
         </Section>
       </ScrollView>
     </ScrollView>
@@ -41,8 +44,13 @@ const Container: React.FC<Props> = (props) => {
     router.navigate('/modal')
   }, [router])
 
+  const onPressNavigateFailed = useCallback(() => {
+    // 存在しないページを表示させようとします
+    router.navigate('/404' as Href)
+  }, [router])
+
   return (
-    <Component {...props} {...{ onPressNavigateTabs, onPressNavigateModal }} />
+    <Component {...props} {...{ onPressNavigateTabs, onPressNavigateModal, onPressNavigateFailed }} />
   )
 }
 
