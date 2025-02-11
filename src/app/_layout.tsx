@@ -50,6 +50,7 @@ export default function RootLayout() {
         />
         <Stack.Screen name="failed" />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="(redirect)" options={{ title: 'ABテスト' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
