@@ -12,6 +12,7 @@ type ComponentProps = {
   onPressNavigateModal: () => void
   onPressNavigateUnmatched: () => void
   onPressNavigateFailed: () => void
+  onPressNavigateDynamicUserID: () => void
   onPressNavigateUserID: () => void
   onPressNavigateUserJson: () => void
   onPressNavigateAB: () => void
@@ -23,6 +24,7 @@ const Component: React.FC<ComponentProps> = ({
   onPressNavigateModal,
   onPressNavigateUnmatched,
   onPressNavigateFailed,
+  onPressNavigateDynamicUserID,
   onPressNavigateUserID,
   onPressNavigateUserJson,
   onPressNavigateAB,
@@ -45,6 +47,10 @@ const Component: React.FC<ComponentProps> = ({
           />
         </Section>
         <Section title="データ渡し">
+          <Cell
+            title="UserID（動的ルートで渡す）"
+            onPress={onPressNavigateDynamicUserID}
+          />
           <Cell
             title="UserID（URLパラメータでデータを渡す）"
             onPress={onPressNavigateUserID}
@@ -75,11 +81,16 @@ const Container: React.FC<Props> = (props) => {
 
   const onPressNavigateUnmatched = useCallback(() => {
     // 存在しないページを表示させようとします
-    router.navigate('/404' as Href)
+    router.navigate('/unmatched/404/' as Href)
   }, [router])
 
   const onPressNavigateFailed = useCallback(() => {
     router.navigate('/failed')
+  }, [router])
+
+  const onPressNavigateDynamicUserID = useCallback(() => {
+    // router.navigate または router.push のどちらでも OK
+    router.navigate('/123')
   }, [router])
 
   const onPressNavigateUserID = useCallback(() => {
@@ -113,6 +124,7 @@ const Container: React.FC<Props> = (props) => {
         onPressNavigateModal,
         onPressNavigateUnmatched,
         onPressNavigateFailed,
+        onPressNavigateDynamicUserID,
         onPressNavigateUserID,
         onPressNavigateUserJson,
         onPressNavigateAB,
