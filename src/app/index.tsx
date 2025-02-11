@@ -16,7 +16,7 @@ type Props = ComponentProps & {}
 const Component: React.FC<ComponentProps> = ({
   onPressNavigateTabs,
   onPressNavigateModal,
-  onPressNavigateFailed
+  onPressNavigateFailed,
 }) => {
   const styles = useStyles()
 
@@ -26,7 +26,10 @@ const Component: React.FC<ComponentProps> = ({
         <Section title="ナビゲーションの基礎">
           <Cell title="タブを表示する" onPress={onPressNavigateTabs} />
           <Cell title="モーダルを表示する" onPress={onPressNavigateModal} />
-          <Cell title="エラーハンドリング（未設定ページを表示する）" onPress={onPressNavigateFailed} />
+          <Cell
+            title="エラーハンドリング（未設定ページを表示する）"
+            onPress={onPressNavigateFailed}
+          />
         </Section>
       </ScrollView>
     </ScrollView>
@@ -50,7 +53,10 @@ const Container: React.FC<Props> = (props) => {
   }, [router])
 
   return (
-    <Component {...props} {...{ onPressNavigateTabs, onPressNavigateModal, onPressNavigateFailed }} />
+    <Component
+      {...props}
+      {...{ onPressNavigateTabs, onPressNavigateModal, onPressNavigateFailed }}
+    />
   )
 }
 
