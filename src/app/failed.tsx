@@ -31,7 +31,7 @@ const Container: React.FC<Props> = (props) => {
 }
 
 /**
- * React Error Boundaries 
+ * React Error Boundaries
  */
 export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
   const styles = useStyles()
