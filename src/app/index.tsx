@@ -90,12 +90,12 @@ const Container: React.FC<Props> = (props) => {
 
   const onPressNavigateDynamicUserID = useCallback(() => {
     // router.navigate または router.push のどちらでも OK
-    router.navigate('/123')
+    router.navigate('/params/123')
   }, [router])
 
   const onPressNavigateUserID = useCallback(() => {
     // router.navigate または router.push のどちらでも OK
-    router.navigate('/userID?userID=123')
+    router.navigate('/params/userID?userID=123')
   }, [router])
 
   const onPressNavigateUserJson = useCallback(() => {
@@ -105,7 +105,7 @@ const Container: React.FC<Props> = (props) => {
       name: 'aaaa',
     }
     router.push({
-      pathname: '/userJson',
+      pathname: '/params/userJson',
       params: {
         userJson: JSON.stringify(user),
       },
