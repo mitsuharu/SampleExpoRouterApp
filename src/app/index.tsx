@@ -5,11 +5,12 @@ import { Href, useRouter } from 'expo-router'
 import { useCallback } from 'react'
 import { ScrollView, useColorScheme, ViewStyle } from 'react-native'
 import { makeStyles } from 'react-native-swag-styles'
-import { User } from './userJson'
+import { User } from './params/userJson'
 
 type ComponentProps = {
   onPressNavigateTabs: () => void
   onPressNavigateModal: () => void
+  onPressFavorite: () => void
   onPressNavigateUnmatched: () => void
   onPressNavigateFailed: () => void
   onPressNavigateDynamicUserID: () => void
@@ -22,6 +23,7 @@ type Props = ComponentProps & {}
 const Component: React.FC<ComponentProps> = ({
   onPressNavigateTabs,
   onPressNavigateModal,
+  onPressFavorite,
   onPressNavigateUnmatched,
   onPressNavigateFailed,
   onPressNavigateDynamicUserID,
@@ -37,6 +39,10 @@ const Component: React.FC<ComponentProps> = ({
         <Section title="ナビゲーションの基礎">
           <Cell title="タブを表示する" onPress={onPressNavigateTabs} />
           <Cell title="モーダルを表示する" onPress={onPressNavigateModal} />
+          <Cell
+            title="私好みのディレクトリ構造の画面を表示する"
+            onPress={onPressFavorite}
+          />
           <Cell
             title="エラーハンドリング（未設定ページ）"
             onPress={onPressNavigateUnmatched}
@@ -77,6 +83,10 @@ const Container: React.FC<Props> = (props) => {
 
   const onPressNavigateModal = useCallback(() => {
     router.navigate('/modal')
+  }, [router])
+
+  const onPressFavorite = useCallback(() => {
+    router.navigate('/favorite')
   }, [router])
 
   const onPressNavigateUnmatched = useCallback(() => {
@@ -122,6 +132,7 @@ const Container: React.FC<Props> = (props) => {
       {...{
         onPressNavigateTabs,
         onPressNavigateModal,
+        onPressFavorite,
         onPressNavigateUnmatched,
         onPressNavigateFailed,
         onPressNavigateDynamicUserID,
